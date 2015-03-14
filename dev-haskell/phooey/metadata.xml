@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		Phooey is a library for functional UIs, providing three different
+		functional interfaces: Monad, Applicative, and Arrow.  See the
+		correspondingly named modules in the list below.  The other modules are
+		exposed for extensibility.
+		
+		Try out the examples in @src\/Examples\/@.
+		
+		Because this library uses reactive, compile apps with @-threaded@.
+		
+		See also
+		
+		* The project wiki page &lt;http://haskell.org/haskellwiki/phooey&gt;
+		
+		* Use of Phooey for composable interfaces in the TV library:
+		&lt;http://haskell.org/haskellwiki/GuiTV&gt;
+		
+		* The implementation of data-driven computation (used in Phooey) from
+		the TypeCompose library: &lt;http://haskell.org/haskellwiki/TypeCompose&gt;
+		
+		This page and the module documentation pages have links to colorized
+		source code and to wiki pages where you can read and contribute /user
+		comments/.  Enjoy!
+		
+		&amp;#169; 2006 by Conal Elliott; BSD3 license.
+	</longdescription>
+</pkgmetadata>

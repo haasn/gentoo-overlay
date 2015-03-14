@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		This is a fairly simple implementation of a
+		general-purpose spline library, just to get the code
+		out there.  Its interface is still mildly unstable and
+		may change (hopefully not drastically) as new needs or
+		better style ideas come up.  Patches, suggestions
+		and/or feature requests are welcome.
+	</longdescription>
+</pkgmetadata>

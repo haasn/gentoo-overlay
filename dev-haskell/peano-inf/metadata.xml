@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		Lazy Peano numbers including observable infinity value.
+		
+		This data type is ideal for lazy list length computation and for serveral graph algorithms.
+		
+		For a comparison with other Peano number implementations, see &lt;http://people.inf.elte.hu/divip/peano/&gt;
+	</longdescription>
+</pkgmetadata>

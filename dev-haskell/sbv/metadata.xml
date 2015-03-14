@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		Express properties about Haskell programs and automatically prove them using SMT
+		(Satisfiability Modulo Theories) solvers. Automatically generate C programs from
+		Haskell functions. The SBV library adds support for symbolic bit vectors and other
+		symbolic types, allowing formal models of Haskell programs to be created.
+		
+		&gt;   $ ghci -XScopedTypeVariables
+		&gt;   Prelude&gt; :m Data.SBV
+		&gt;   Prelude Data.SBV&gt; prove $ \(x::SWord8) -&gt; x `shiftL` 2 .== 4*x
+		&gt;   Q.E.D.
+		&gt;   Prelude Data.SBV&gt; prove $ forAll [&quot;x&quot;] $ \(x::SWord8) -&gt; x `shiftL` 2 .== x
+		&gt;   Falsifiable. Counter-example:
+		&gt;     x = 128 :: SWord8
+		
+		You can pick the SMT solver you want to use by importing the appropriate module. The SBV library currently
+		works with the the following SMT solvers:
+		
+		[@import &quot;Data.SBV&quot;@]
+		Picks the default solver, which is currently set to be Z3. (Might change in the future!)
+		
+		[@import &quot;Data.SBV.Bridge.Z3&quot;@]
+		Picks Z3 from Microsoft (&lt;http://z3.codeplex.com/&gt;).
+		
+		[@import &quot;Data.SBV.Bridge.Yices&quot;@]
+		Picks Yices from SRI (&lt;http://yices.csl.sri.com/&gt;)
+		
+		[@import &quot;Data.SBV.Bridge.CVC4&quot;@]
+		Picks CVC4 from New York University and the University of Iowa (&lt;http://cvc4.cs.nyu.edu&gt;)
+		
+		[@import &quot;Data.SBV.Bridge.Boolector&quot;@]
+		Picks Boolector from Johannes Kepler University at (&lt;http://fmv.jku.at/boolector/&gt;).
+		
+		SBV introduces the following types and concepts:
+		
+		* &#39;SBool&#39;: Symbolic Booleans (bits)
+		
+		* &#39;SWord8&#39;, &#39;SWord16&#39;, &#39;SWord32&#39;, &#39;SWord64&#39;: Symbolic Words (unsigned)
+		
+		* &#39;SInt8&#39;,  &#39;SInt16&#39;,  &#39;SInt32&#39;,  &#39;SInt64&#39;: Symbolic Ints (signed)
+		
+		* &#39;SInteger&#39;: Symbolic unbounded integers (signed)
+		
+		* &#39;SReal&#39;: Symbolic algebraic reals (signed)
+		
+		* &#39;SArray&#39;, &#39;SFunArray&#39;: Flat arrays of symbolic values
+		
+		* &#39;STree&#39;: Full binary trees of symbolic values (for fast symbolic access)
+		
+		* Symbolic polynomials over GF(2^n), and polynomial arithmetic
+		
+		* Uninterpreted constants and functions over symbolic values, with user defined axioms.
+		
+		* Uninterpreted sorts, and proofs over such sorts, potentially with axioms.
+		
+		Functions built out of these types can be:
+		
+		* proven correct via an external SMT solver (the &#39;prove&#39; function)
+		
+		* checked for satisfiability (the &#39;sat&#39;, and &#39;allSat&#39; functions)
+		
+		* used in synthesis (the &#39;sat&#39; function with existential variables)
+		
+		* optimized with respect to cost functions (the &#39;optimize&#39;, &#39;maximize&#39;,
+		and &#39;minimize&#39; functions)
+		
+		* quick-checked
+		
+		* used in concrete test case generation (the &#39;genTest&#39; function), rendered as
+		values in various languages, including Haskell and C.
+		
+		Predicates can have both existential and universal variables. Use of
+		alternating quantifiers provides considerable expressive power.
+		Furthermore, existential variables allow synthesis via model generation.
+		
+		The SBV library can also compile Haskell functions that manipulate symbolic
+		values directly to C, rendering them as straight-line C programs.
+		
+		In addition to the library, the installation will create the
+		executable @SBVUnitTests@. You should run it once the installation is complete,
+		to make sure the unit tests are run and all is well.
+		
+		SBV is hosted at GitHub: &lt;http://github.com/LeventErkok/sbv&gt;. Comments,
+		bug reports, and patches are always welcome.
+		
+		The following people reported bugs, provided comments/feedback, or contributed to the
+		development of SBV in various ways: Ian Blumenfeld, Ian Calvert, Iavor Diatchki, John
+		Erickson, Tom Hawkins, Lee Pike, Austin Seipp, Don Stewart, Josef Svenningsson, and
+		Nis Wegmann.
+		
+		Release notes can be seen at: &lt;http://github.com/LeventErkok/sbv/blob/master/RELEASENOTES&gt;.
+	</longdescription>
+</pkgmetadata>

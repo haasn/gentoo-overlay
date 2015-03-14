@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		The base package&#39;s &#39;Data.Complex&#39; has a &#39;RealFloat&#39; requirement for
+		almost all operations, which rules out uses such as &#39;Complex Rational&#39;
+		or &#39;Complex Integer&#39;.  This package provides an alternative, putting
+		most operations into additional type classes.  Generating instances
+		with template haskell helps reduce excessive boilerplate and avoids
+		instance overlap.
+	</longdescription>
+</pkgmetadata>

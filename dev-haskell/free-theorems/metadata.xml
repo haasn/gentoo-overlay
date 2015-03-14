@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		The free-theorems library allows to automatically generate free
+		theorems from Haskell type expressions. It supports nearly all
+		Haskell 98 types except of type constructor classes, and in
+		addition it can also handle higher-rank functions. Free theorems
+		are generated for three different sublanguages of Haskell, a
+		basic one corresponding to the polymorphic lambda-calculus of
+		Girard-Reynolds, an extension of that allowing for recursion and
+		errors, and finally a sublanguage additionally allowing seq.
+		In the last two sublanguages, also inequational free theorems
+		may be derived in addition to classical equational results.
+	</longdescription>
+</pkgmetadata>

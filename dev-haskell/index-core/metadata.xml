@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		This library implements indexed types in the style of Conor McBride,
+		described in the functional pearl \&quot;Kleisli arrows of outrageous fortune\&quot;,
+		following his presentation closely.
+		
+		This provides a more general form of indexed monad than the one people are
+		most commonly familiar with.
+	</longdescription>
+</pkgmetadata>

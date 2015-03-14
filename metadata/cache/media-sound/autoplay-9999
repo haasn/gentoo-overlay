@@ -1,0 +1,22 @@
+dev-vcs/git
+=dev-lang/python-2*[sqlite] dev-python/python-mpd
+0
+http://github.com/codl/autoplay/zipball/master
+
+http://github.com/codl/autoplay/
+public-domain
+Daemon that keeps MPD playlist filled and learns what you like
+
+git-2
+
+
+
+
+4
+
+install unpack
+
+
+
+
+

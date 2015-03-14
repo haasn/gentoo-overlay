@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		This can be used to send Bitcoins, query balances, etc.  It
+		requires the Bitcoin daemon to be running and accessible via
+		HTTP.
+		
+		&gt; import Network.Bitcoin
+		&gt;
+		&gt; main = do
+		&gt;    balance &lt;- getBalance auth
+		&gt;    putStrLn $ show balance ++ &quot; BTC&quot;
+		&gt;  where
+		&gt;    auth = Auth &quot;http://127.0.0.1:8332&quot; &quot;user&quot; &quot;password&quot;
+		
+		To learn more about Bitcoin, see &lt;http://www.bitcoin.org&gt;.
+		
+		Changes in v1.0
+		
+		- Total overhaul of the library, with almost the complete bitcoin RPC API
+		covered.
+		
+		- Dependencies upgraded, and library modernized.
+		
+		Changes in v0.1.5
+		
+		- Correct aeson dependency
+		
+		Changes in v0.1.4
+		
+		- More accurate conversion of Bitcoin amounts from floating point
+	</longdescription>
+</pkgmetadata>

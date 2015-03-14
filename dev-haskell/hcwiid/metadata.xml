@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		HCWiid is a working userspace driver along with various
+		applications implementing event drivers, multiple
+		wiimote&#9;connectivity, gesture recognition,
+		and other Wiimote-based functionality.
+	</longdescription>
+</pkgmetadata>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		hpaste is a simple command line utility for piping text to online pastebin sites such as hpaste.org, paste2.org, pastebin.com and others. Text can be passed via STDIN, or by giving a file argument; text is pasted online, and the URL of the paste is printed to STDOUT. Use --help for more information.
+	</longdescription>
+</pkgmetadata>

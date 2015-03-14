@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		This is an OpenPGP library inspired by my work on OpenPGP libraries in
+		Ruby &lt;https://github.com/singpolyma/openpgp&gt;,
+		PHP &lt;http://github.com/singpolyma/openpgp-php&gt;,
+		and Python &lt;https://github.com/singpolyma/OpenPGP-Python&gt;.
+		
+		It defines types to represent OpenPGP messages as a series of packets
+		and then defines instances of Data.Binary for each to facilitate
+		encoding/decoding.
+		
+		There is also a wrapper around &lt;http://hackage.haskell.org/package/Crypto&gt;
+		that currently does fingerprint generation, signature generation, and
+		signature verification (for RSA keys only).
+		
+		It is intended that you use qualified imports with this library.  If importing
+		both modules, something like this will do:
+		
+		&gt; import qualified Data.OpenPGP as OpenPGP
+		&gt; import qualified Data.OpenPGP.Crypto as OpenPGP
+	</longdescription>
+</pkgmetadata>

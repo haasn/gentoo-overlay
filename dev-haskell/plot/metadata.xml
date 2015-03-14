@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		A package for creating plots, built on top of the Cairo rendering engine.
+		
+		An ambitious attempt to replace gnuplot.
+		
+		Monadic actions are used to configure a figure, which is a (rxc) array of subplots.
+		Each plot displays a graph with optional heading, labels, legend, and annotations.
+		The annotations themselves may be used to draw diagrams.
+		
+		A figure is preprocessed in preparation for rendering by the Cairo renderer.
+		The Cairo library can be used to output the figure to PS, PDF, SVG, and PNG file formats,
+		or to display the figure in a GTK Drawable context.  (see package &#39;plot-gtk&#39;).
+		
+		The preprocessed figure can be embedded as an arbitrary Cairo render, including in a diagram
+		created with the diagram package.  Conversely, arbitrary Cairo renders can be embedded in
+		the data region of a &#39;Figure&#39;.
+		
+		The data series are type &quot;Data.Packed.Vector&quot; from hmatrix, which, when hmatrix
+		is compiled with &#39;-fvector&#39;, is a synonym for &quot;Data.Vector.Storable&quot; from the
+		vector package and are thus compatible with packages such as statistics.
+		
+		The example in Graphics.Rendering.Plot can be viewed at
+		&lt;http://code.haskell.org/plot/examples/perturbed-sine.png&gt;
+		
+		
+	</longdescription>
+</pkgmetadata>

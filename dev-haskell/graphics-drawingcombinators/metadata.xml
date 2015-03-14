@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		This module is a functional wrapper around OpenGL, so you don&#39;t
+		have to go into the deep, dark world of imperative stateful
+		programming just to draw stuff.  It supports 2D only (for now),
+		with support drawing geometry, images, and text.
+	</longdescription>
+</pkgmetadata>

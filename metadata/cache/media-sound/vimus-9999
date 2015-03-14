@@ -1,0 +1,22 @@
+>=dev-haskell/cabal-1.6 dev-haskell/data-default =dev-haskell/libmpd-9999 =dev-haskell/mtl-2.0* >=dev-lang/ghc-7.0.1 >=dev-haskell/cabal-1.1.4 dev-vcs/git
+
+0
+http://github.com/sol/vimus/zipball/master
+
+http://github.com/sol/vimus
+MIT
+An MPD client with vim-like key bindings
+
+eutils ghc-package git-2 haskell-cabal multilib toolchain-funcs user versionator
+
+
+
+
+4
+
+compile configure install postinst prerm setup test unpack
+
+
+
+
+

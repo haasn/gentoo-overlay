@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		This library provides implementations of finite sets and maps for list keys
+		using tries, both simple and of the Patricia kind. In most (or all? sorry,
+		haven&#39;t benchmarked yet) cases, the Patricia tries will have better
+		performance, so use them unless you have reasons not to.
+		
+		The data types are parametrized over the map type they use internally to
+		store the child nodes: this allows extending them to support different kinds
+		of key types or increasing efficiency. Child maps are required to be
+		instances of the Map class in Data.ListTrie.Base.Map. Some operations
+		additionally require an OrdMap instance.
+		
+		The Eq, Ord, and Enum modules contain ready structures for key types which
+		are instances of those classes, using lists of pairs, Data.Map, and
+		Data.IntMap respectively.
+	</longdescription>
+</pkgmetadata>

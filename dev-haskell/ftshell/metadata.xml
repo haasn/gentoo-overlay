@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		The ftshell is a shell-based user interface to interact with the
+		free-theorems library. It offers all possibilities provided by
+		that library to generate free theorems from Haskell type
+		expressions.
+	</longdescription>
+</pkgmetadata>

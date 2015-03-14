@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>no-herd</herd>
+<maintainer>
+	<email>maintainer-needed@gentoo.org</email>
+</maintainer>
+<longdescription lang="en">
+Autoplay gives each song a karma rating based on how often it adds that song, and how often that song is played.
+Usually, bad songs have karma under 0.25, meh songs have karma between 0.25 and 0.60, and good songs are over 0.60. A song that is often added by the user to the playlist will have a karma over 1.
+When a song is played, there is a cooldown time (default 12h) during which autoplay cannot add it. This way, the same songs cannot be spammed over and over.
+</longdescription>
+</pkgmetadata>
+

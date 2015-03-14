@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>haskell</herd>
+	<maintainer>
+		<email>haskell@gentoo.org</email>
+	</maintainer>
+	<longdescription>
+		The Gtk Toy Framework is a simplifying interface over Gtk for creating
+		applications which draw things and interact with the mouse and keyboard.  It
+		handles the minutae of setting up the Gtk window and canvas, and processes
+		the input events into more palatable data structures.
+	</longdescription>
+</pkgmetadata>
