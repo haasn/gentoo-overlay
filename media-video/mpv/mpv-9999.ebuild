@@ -4,9 +4,9 @@
 
 EAPI=5
 
-#EGIT_REPO_URI="https://github.com/haasn/mpv.git"
-EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
-EGIT_BRANCH="tscale"
+EGIT_REPO_URI="https://github.com/haasn/mpv.git"
+#EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
+#EGIT_BRANCH="tscale"
 
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 PYTHON_REQ_USE='threads(+)'
