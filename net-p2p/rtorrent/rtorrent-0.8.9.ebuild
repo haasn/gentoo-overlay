@@ -21,7 +21,6 @@ COMMON_DEPEND=">=net-libs/libtorrent-0.12.${PV##*.}
 	sys-libs/ncurses
 	xmlrpc? ( dev-libs/xmlrpc-c )"
 RDEPEND="${COMMON_DEPEND}
-	<net-misc/curl-7.24
 	daemon? ( app-misc/screen )"
 DEPEND="${COMMON_DEPEND}
 	test? ( dev-util/cppunit )
