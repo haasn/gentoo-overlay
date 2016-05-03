@@ -18,7 +18,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="dev-python/python-mpd"
-PYTHON_DEPEND="2:2.5"
+PYTHON_DEPEND="3"
 PYTHON_USE_WITH="sqlite"
 inherit python
 
