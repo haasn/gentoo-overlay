@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 DESCRIPTION="Daemon that keeps MPD playlist filled and learns what you like"
 HOMEPAGE="http://github.com/codl/autoplay/"
@@ -16,12 +16,22 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND=""
-RDEPEND="dev-python/python-mpd"
-PYTHON_DEPEND="3"
-PYTHON_USE_WITH="sqlite"
-inherit python
+PYTHON_COMPAT=( python3_4 )
+PYTHON_REQ_USE="sqlite"
+inherit python-single-r1
+
+RDEPEND="${PYTHON_DEPS}
+         dev-python/python-mpd[${PYTHON_USEDEP}]"
+
+DEPEND="${RDEPEND}"
+
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+src_prepare() {
+	python_fix_shebang .
+}
 
 src_install() {
-	newbin autoplay.py autoplay
+	newbin autoplay.py autoplay || die
+	dodoc README.md
 }
