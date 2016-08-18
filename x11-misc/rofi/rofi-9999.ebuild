@@ -37,9 +37,6 @@ DEPEND="
 "
 
 src_prepare() {
-	#epatch "${FILESDIR}"/${PN}-0.15.12-Werror.patch
-	epatch "${FILESDIR}"/${PN}-bash.patch
-
 	eautoreconf
 }
 
