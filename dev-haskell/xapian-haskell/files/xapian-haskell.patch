@@ -1,0 +1,215 @@
+diff --git a/cbits/cxapian_document.cc b/cbits/cxapian_document.cc
+index 7d7161e..4c60eb9 100644
+--- a/cbits/cxapian_document.cc
++++ b/cbits/cxapian_document.cc
+@@ -19,16 +19,17 @@ document_delete (Xapian::Document *doc)
+     delete doc;
+ }
+ 
+-const char *
++std::string *
+ document_get_value (Xapian::Document *doc, unsigned int valueno)
+ {
+-    return doc->get_value((Xapian::valueno) valueno).c_str();
++    std::string *str = new std::string(doc->get_value((Xapian::valueno) valueno));
++    return str;
+ }
+ 
+ void
+-document_add_value (Xapian::Document *doc, unsigned int valueno, const char *value)
++document_add_value (Xapian::Document *doc, unsigned int valueno, std::string *value)
+ {
+-    doc->add_value((Xapian::valueno)valueno, std::string(value));
++    doc->add_value((Xapian::valueno)valueno, *value);
+ }
+ 
+ void
+diff --git a/cbits/cxapian_document.h b/cbits/cxapian_document.h
+index 2ee9800..46fac85 100644
+--- a/cbits/cxapian_document.h
++++ b/cbits/cxapian_document.h
+@@ -15,11 +15,11 @@ document_copy (Xapian::Document *);
+ void
+ document_delete (Xapian::Document *);
+ 
+-const char *
++std::string *
+ document_get_value (Xapian::Document *, unsigned int valueno);
+ 
+ void
+-document_add_value (Xapian::Document *, unsigned int valueno, const char *value);
++document_add_value (Xapian::Document *, unsigned int valueno, std::string *value);
+ 
+ void
+ document_remove_value(Xapian::Document *, unsigned int valueno);
+diff --git a/cbits/cxapian_queryparser.cc b/cbits/cxapian_queryparser.cc
+index 5adfc5f..ce3aeee 100644
+--- a/cbits/cxapian_queryparser.cc
++++ b/cbits/cxapian_queryparser.cc
+@@ -97,3 +97,10 @@ queryparser_get_description (Xapian::QueryParser *self)
+     std::string *str = new std::string( self->get_description() );
+     return str;
+ }
++
++std::string *
++queryparser_sortable_serialise (double value)
++{
++    std::string *str = new std::string( Xapian::sortable_serialise(value) );
++    return str;
++}
+diff --git a/cbits/cxapian_queryparser.h b/cbits/cxapian_queryparser.h
+index 590e1cd..f774d19 100644
+--- a/cbits/cxapian_queryparser.h
++++ b/cbits/cxapian_queryparser.h
+@@ -70,6 +70,9 @@ queryparser_get_corrected_query_string (Xapian::QueryParser *);
+ std::string *
+ queryparser_get_description (Xapian::QueryParser *);
+ 
++std::string *
++queryparser_sortable_serialise (double value);
++
+ }
+ 
+ 
+diff --git a/src/Search/Xapian/Database.hs b/src/Search/Xapian/Database.hs
+index 3e4a447..ab5de4f 100644
+--- a/src/Search/Xapian/Database.hs
++++ b/src/Search/Xapian/Database.hs
+@@ -23,6 +23,11 @@ import qualified Search.Xapian.Query as Q
+ -- * interfacing the database
+ 
+ instance ReadableDatabase ReadOnlyDB where
++    close db@(ReadOnlyDB dbmptr) =
++        liftIO $
++         withForeignPtr dbmptr $ \dbptr ->
++          cx_database_close dbptr
++
+     search db@(ReadOnlyDB dbmptr) query (QueryRange off lim) =
+         liftIO $
+         Q.compileQuery db query >>= \querymptr ->
+@@ -153,6 +158,7 @@ __withDbAndTerm f (ReadOnlyDB dbmptr) term =
+     useAsCCString term $ f dbptr
+ 
+ instance ReadableDatabase ReadWriteDB where
++  close           = __withCastedDB close
+   search          = __withCastedDB search
+   getDocument     = __withCastedDB getDocument
+   getMetadata     = __withCastedDB getMetadata
+@@ -211,6 +217,11 @@ openReadWrite option path =
+ 
+ instance WritableDatabase ReadWriteDB where
+ 
++    commit db@(ReadWriteDB dbmptr) =
++        liftIO $
++         withForeignPtr dbmptr $ \dbptr ->
++          cx_database_commit dbptr
++
+     addDocument (ReadWriteDB dbmptr) doc =
+         liftIO $
+         withForeignPtr dbmptr $ \dbptr ->
+diff --git a/src/Search/Xapian/Document.hs b/src/Search/Xapian/Document.hs
+index f5ead0a..34b8079 100644
+--- a/src/Search/Xapian/Document.hs
++++ b/src/Search/Xapian/Document.hs
+@@ -81,7 +81,7 @@ delPosting pos term =
+ getValue :: ValueNumber -> Document -> XapianM Value
+ getValue valno =
+     withDocumentPtr $ \ptr ->
+-    cx_document_get_value ptr (fromIntegral valno) >>= BS.packCString
++    cx_document_get_value ptr (fromIntegral valno) >>= manage >>= fromCCString
+ 
+ getValues :: Document -> XapianM (IntMap Value)
+ getValues =
+@@ -93,8 +93,8 @@ getValues =
+ setValue :: ValueNumber -> Value -> Document -> XapianM ()
+ setValue valno val =
+     withDocumentPtr $ \ptr ->
+-    useAsCString val $ \cval ->
+-    cx_document_add_value ptr (fromIntegral valno) cval
++    useAsCCString val $ \ccval ->
++    cx_document_add_value ptr (fromIntegral valno) ccval
+ 
+ setValues :: IntMap Value -> Document -> XapianM ()
+ setValues vals doc =
+diff --git a/src/Search/Xapian/Internal/FFI.hs b/src/Search/Xapian/Internal/FFI.hs
+index 6142108..8cfd4b4 100644
+--- a/src/Search/Xapian/Internal/FFI.hs
++++ b/src/Search/Xapian/Internal/FFI.hs
+@@ -344,10 +344,10 @@ foreign import ccall unsafe "&document_delete"
+     cx_document_delete :: FunPtr (Ptr CDocument -> IO ())
+ 
+ foreign import ccall unsafe "document_get_value"
+-    cx_document_get_value :: Ptr CDocument -> Word32 -> IO CString
++    cx_document_get_value :: Ptr CDocument -> Word32 -> IO (Ptr StdString)
+ 
+ foreign import ccall unsafe "document_add_value"
+-    cx_document_add_value :: Ptr CDocument -> Word32 -> CString -> IO ()
++    cx_document_add_value :: Ptr CDocument -> Word32 -> Ptr StdString -> IO ()
+ 
+ foreign import ccall unsafe "document_remove_value"
+     cx_document_remove_value :: Ptr CDocument -> Word32 -> IO ()
+@@ -553,7 +553,7 @@ instance Manageable CQuery where
+     manage = newForeignPtr cx_query_delete
+ 
+ data CQueryVector
+-data CQueryIterator -- | FIXME: do we need to finalize CQueryIterators?
++data CQueryIterator -- FIXME: do we need to finalize CQueryIterators?
+ 
+ instance Manageable CQueryVector where
+     manage = newForeignPtr cx_vector_delete
+@@ -715,6 +715,9 @@ foreign import ccall unsafe "queryparser_get_corrected_query_string"
+ foreign import ccall unsafe "queryparser_get_description"
+     cx_queryparser_get_description :: Ptr CQueryParser -> IO (Ptr StdString)
+ 
++foreign import ccall unsafe "queryparser_sortable_serialise"
++    cx_sortable_serialise :: CDouble -> IO (Ptr StdString)
++
+ -- Stem
+ -- ---------------------------------------------------------
+ 
+diff --git a/src/Search/Xapian/Query.hs b/src/Search/Xapian/Query.hs
+index c1a5c0d..4cccdf1 100644
+--- a/src/Search/Xapian/Query.hs
++++ b/src/Search/Xapian/Query.hs
+@@ -1,4 +1,4 @@
+-{-# LANGUAGE TypeSynonymInstances #-}
++{-# LANGUAGE TypeSynonymInstances, FlexibleInstances #-}
+ 
+ module Search.Xapian.Query
+      ( -- * Generic Query constructor
+@@ -8,6 +8,7 @@ module Search.Xapian.Query
+        , rawQuery
+        , resultsFromTo
+        , paging
++       , sortableSerialise
+        
+        -- * Lower level
+        , compileQuery
+@@ -189,3 +190,7 @@ describeQuery :: QueryPtr -> IO ByteString
+ describeQuery q =
+   withForeignPtr q $ \query' ->
+   fromCCString =<< manage =<< cx_query_get_description query'
++
++sortableSerialise :: Double -> IO ByteString
++sortableSerialise d =
++    cx_sortable_serialise (realToFrac d) >>= manage >>= fromCCString
+diff --git a/src/Search/Xapian/Types.hs b/src/Search/Xapian/Types.hs
+index 861be2f..7820526 100644
+--- a/src/Search/Xapian/Types.hs
++++ b/src/Search/Xapian/Types.hs
+@@ -88,6 +88,7 @@ collectE' :: Int -> XapianE a [a] -> XapianM [a]
+ collectE' chunksize xe = run_ $ (xe chunksize) $$ consume
+ 
+ class ReadableDatabase db where
++    close           :: db -> XapianM ()
+     search          :: db -> Query -> QueryRange -> XapianM (MSet, [Document])
+     getDocument     :: db -> DocumentId -> XapianM (Either Error Document)
+     suggestSpelling :: db -> ByteString -> Int -> XapianM ByteString
+@@ -109,6 +110,7 @@ class ReadableDatabase db where
+     wdfMax          :: db -> ByteString -> XapianM Wdf
+ 
+ class WritableDatabase db where
++    commit            :: db -> XapianM ()
+     addDocument       :: db -> Document -> XapianM DocumentId
+     delDocumentById   :: db -> DocumentId -> XapianM ()
+     delDocumentByTerm :: db -> ByteString -> XapianM ()
