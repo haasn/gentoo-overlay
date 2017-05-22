@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>haskell@gentoo.org</email>
+		<name>Gentoo Haskell</name>
+	</maintainer>
+	<longdescription>
+		This library provides persistent, time and space efficient integer
+		sets implemented as dense big-endian patricia trees with buddy
+		suffixes compaction. In randomized settings this structure expected
+		to be as fast as Data.IntSet from containers, but if a sets is
+		likely to have long continuous intervals it should be much faster.
+	</longdescription>
+</pkgmetadata>

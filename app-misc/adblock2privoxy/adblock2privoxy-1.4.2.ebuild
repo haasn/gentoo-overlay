@@ -19,7 +19,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="dev-haskell/case-insensitive:=
-	<=dev-haskell/http-conduit-2.2:=
+	<dev-haskell/http-conduit-2.3:=
 	dev-haskell/missingh:=
 	dev-haskell/mtl:=
 	>=dev-haskell/network-2.4:=
@@ -34,3 +34,8 @@ RDEPEND="dev-haskell/case-insensitive:=
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.10
 "
+
+src_prepare() {
+	epatch "${FILESDIR}/http-conduit-2.2.patch"
+	default
+}

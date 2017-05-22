@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-PYTHON_COMPAT=( python3_4 python3_5 )
+PYTHON_COMPAT=( python{3_4,3_5} )
 PYTHON_REQ_USE="sqlite"
 inherit python-single-r1
 
