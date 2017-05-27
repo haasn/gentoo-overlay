@@ -1,0 +1,29 @@
+From 4ecad09ff28fe6b4a5fd8fa1459b80ef661e37c2 Mon Sep 17 00:00:00 2001
+From: Niklas Haas <git@haasn.xyz>
+Date: Tue, 6 Dec 2016 19:53:29 +0100
+Subject: [PATCH] Update for http-conduit 2.2
+
+---
+ adblock2privoxy/src/Network.hs | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/adblock2privoxy/src/Network.hs b/adblock2privoxy/src/Network.hs
+index 838fd2b..454ae7e 100644
+--- a/adblock2privoxy/src/Network.hs
++++ b/adblock2privoxy/src/Network.hs
+@@ -14,10 +14,10 @@ downloadHttp ::  Manager -> Int -> String -> IO String
+ downloadHttp manager retries url = do
+                 putStrLn $ "load " ++ url ++ " (" ++ show retries ++ " more attempts)..."
+                 req <- parseUrl url
+-                let req' = req {responseTimeout = Just 15000000}
++                let req' = req {responseTimeout = responseTimeoutMicro 15000000}
+                 result <- try $ liftM responseBody $ httpLbs req' manager
+                 case result of
+-                    Left e@(FailedConnectionException _ _) ->
++                    Left e@(HttpExceptionRequest _ (ConnectionFailure _)) ->
+                       if retries > 0 then downloadHttp manager (retries - 1) url else throw e
+                     Left e -> throw e
+                     Right content -> return $ unpack.decodeUtf8 $ content
+-- 
+2.10.2
+
