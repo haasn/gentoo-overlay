@@ -10,13 +10,17 @@ inherit haskell-cabal git-r3
 
 DESCRIPTION="Pure, mergeable, succinct Int sets"
 HOMEPAGE="https://github.com/pxqr/intset"
-EGIT_REPO_URI="https://github.com/pxqr/intset.git"
+EGIT_REPO_URI="https://github.com/haasn/intset.git"
+EGIT_COMMIT="v${PV}"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
 KEYWORDS="~amd64 ~x86"
 
-RDEPEND=">=dev-lang/ghc-7.10:=
+RDEPEND="
+	|| ( ( >=dev-haskell/bits-extras-0.1.2:=[profile?]
+		   >=dev-lang/ghc-7.4.1:= )
+		 >=dev-lang/ghc-7.10.3:= )
 "
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.8
@@ -24,11 +28,6 @@ DEPEND="${RDEPEND}
 			dev-haskell/test-framework
 			>=dev-haskell/test-framework-quickcheck2-0.3 )
 "
-
-src_prepare() {
-	epatch "${FILESDIR}/ghc-7.10.patch"
-	eapply_user
-}
 
 src_configure() {
 	haskell-cabal_src_configure \
