@@ -33,6 +33,7 @@ DEPEND="
 	${RDEPEND}
 	x11-proto/xineramaproto
 	x11-proto/xproto
+	dev-libs/check
 	virtual/pkgconfig
 "
 

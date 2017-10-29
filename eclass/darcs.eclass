@@ -1,0 +1,1 @@
+/var/lib/layman/haskell/eclass/darcs.eclass
