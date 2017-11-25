@@ -1,0 +1,16 @@
+diff --git a/wscript b/wscript
+index 77b2ed4dd2..34001323ea 100644
+--- a/wscript
++++ b/wscript
+@@ -441,6 +441,11 @@ libav_pkg_config_checks = [
+     'libavresample', '>= 4.0.0',
+ ]
+ 
++# add mpv suffix to ffmpeg checks
++for i, _ in enumerate(ffmpeg_pkg_config_checks):
++    if i % 2 == 0:
++        ffmpeg_pkg_config_checks[i] += 'mpv'
++
+ def check_ffmpeg_or_libav_versions():
+     def fn(ctx, dependency_identifier, **kw):
+         versions = ffmpeg_pkg_config_checks
