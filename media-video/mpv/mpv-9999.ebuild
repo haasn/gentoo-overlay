@@ -134,6 +134,8 @@ PATCHES=(
 	"${FILESDIR}/0001-Revert-wscript-rebuild-on-library-header-changes.patch"
 )
 
+CFLAGS="${CFLAGS} -I/usr/include/ffmpeg-mpv"
+
 pkg_setup() {
 	[[ ${MERGE_TYPE} != "binary" ]] && python_setup
 }
@@ -194,7 +196,6 @@ src_configure() {
 		--disable-vapoursynth-lazy
 		$(use_enable archive libarchive)
 
-		--enable-ffmpeg-upstream
 		--enable-libavdevice
 
 		# Audio outputs:
