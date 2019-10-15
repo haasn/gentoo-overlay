@@ -23,6 +23,4 @@ RDEPEND="dev-lang/perl
 src_install() {
 	exeinto /usr/$(get_libdir)/nagios/plugins
 	doexe check_ipmi_sensor
-
-	dodoc changelog.txt
 }
