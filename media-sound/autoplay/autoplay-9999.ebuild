@@ -9,7 +9,7 @@ HOMEPAGE="http://github.com/codl/autoplay/"
 SRC_URI="http://github.com/codl/autoplay/zipball/master"
 
 EGIT_REPO_URI="git://github.com/codl/autoplay.git"
-inherit git-2
+inherit git-r3
 
 LICENSE="public-domain"
 SLOT="0"
@@ -20,8 +20,7 @@ PYTHON_COMPAT=( python{3_4,3_5,3_6} )
 PYTHON_REQ_USE="sqlite"
 inherit python-single-r1
 
-RDEPEND="${PYTHON_DEPS}
-         dev-python/python-mpd[${PYTHON_USEDEP}]"
+RDEPEND="${PYTHON_DEPS}"
 
 DEPEND="${RDEPEND}"
 

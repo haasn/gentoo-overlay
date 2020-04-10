@@ -1,0 +1,30 @@
+diff -rwu drc-3.2.2.orig/source/lsconv.c drc-3.2.2/source/lsconv.c
+--- drc-3.2.2.orig/source/lsconv.c	2017-10-04 09:06:00.000000000 +0200
++++ drc-3.2.2/source/lsconv.c	2018-02-23 04:12:21.824059252 +0100
+@@ -216,7 +216,7 @@
+ 			}
+ 		for(I = 0;I < IS;I++)
+ 			{
+-				if (fread(&RF,sizeof(float),1,IOF) < sizeof(float))
++				if (fread(&RF,sizeof(float),1,IOF) != 1)
+ 					{
+ 						perror("Error while reading the inverse file");
+ 						return 1;
+@@ -244,7 +244,7 @@
+ 					Sweep[I] = (DLReal) 0.0;
+ 				for(I = CS - IS,J = 0;J < RS;I++,J++)
+ 					{
+-						if (fread(&RF,sizeof(float),1,IOF) < sizeof(float))
++						if (fread(&RF,sizeof(float),1,IOF) != 1)
+ 							{
+ 								perror("Error while reading the reference file");
+ 								return 1;
+@@ -373,7 +373,7 @@
+ 			}
+ 		for(I = 0;I < SS;I++)
+ 			{
+-				if (fread(&RF,sizeof(float),1,IOF) < sizeof(float))
++				if (fread(&RF,sizeof(float),1,IOF) != 1)
+ 					{
+ 						perror("Error while reading the sweep file");
+ 						return 1;

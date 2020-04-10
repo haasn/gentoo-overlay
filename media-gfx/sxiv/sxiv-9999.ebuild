@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit eutils savedconfig toolchain-funcs git-2
+inherit eutils savedconfig toolchain-funcs git-r3
 
 DESCRIPTION="Simple (or small or suckless) X Image Viewer"
 HOMEPAGE="https://github.com/muennich/sxiv/"
