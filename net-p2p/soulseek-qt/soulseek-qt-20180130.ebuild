@@ -7,8 +7,8 @@ inherit desktop
 
 DESCRIPTION="Official binary Qt SoulSeek client"
 HOMEPAGE="http://www.soulseekqt.net/"
-BINARY_NAME="SoulseekQt-${PV:0:4}-$((${PV:4:2}))-$((${PV:6:2}))"
-SRC_URI="https://www.slsknet.org/SoulseekQt/Linux/${BINARY_NAME}-64bit-appimage.tgz https://www.dropbox.com/s/3qdatnoi10e3c17/slsk.png"
+BINARY_NAME="SoulseekQt-${PV:0:4}-$((${PV:4:2}))-$((${PV:6:2}))-64bit"
+SRC_URI="https://www.slsknet.org/SoulseekQt/Linux/${BINARY_NAME}-appimage.tgz"
 
 LICENSE="free-noncomm"
 SLOT="0"
@@ -25,13 +25,13 @@ RESTRICT="mirror"
 QA_PREBUILT="opt/bin/.*"
 
 src_unpack() {
-	unpack ${BINARY_NAME}-64bit-appimage.tgz
+	unpack ${BINARY_NAME}-appimage.tgz
+	./${BINARY_NAME}.AppImage --appimage-extract
 }
 
 src_install() {
-	use amd64 && BINARY_NAME="${BINARY_NAME}-64bit"
-	into /opt
-	newbin "${BINARY_NAME}".AppImage "${PN}"
-	doicon "${DISTDIR}/slsk.png"
-	make_desktop_entry "/opt/bin/soulseek-qt" "Soulseek" "slsk" "Network;FileTransfer;"
+	cd squashfs-root
+	newbin "SoulseekQt" "soulseek-qt"
+	doicon "soulseek.png"
+	make_desktop_entry "soulseek-qt" "Soulseek" "soulseek" "Network;FileTransfer;"
 }
